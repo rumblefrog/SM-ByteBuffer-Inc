@@ -62,9 +62,9 @@ enum struct ByteBuffer {
     void WriteString(const char[] input) {
         int length = strlen(input);
 
-		for(int i = 0; i < length; i++) {
-			this.WriteByte(view_as<int>(input[i]));
-		}
+        for(int i = 0; i < length; i++) {
+            this.WriteByte(view_as<int>(input[i]));
+        }
     }
 
     void WriteCString(const char[] input) {
@@ -114,55 +114,55 @@ enum struct ByteBuffer {
 
     int ReadCString(char[] output, int maxlen) {
         for(int i = 0; i < maxlen; i++) {
-			output[i] = this.ReadByte();
-			
-			if(output[i] == '\0') {
-				return i + 1;
-			}
-		}
-		
-		return maxlen;
+            output[i] = this.ReadByte();
+            
+            if(output[i] == '\0') {
+                return i + 1;
+            }
+        }
+
+        return maxlen;
     }
 
     int Dump(char[] output, int maxlen) {
-		if(maxlen > this.Cursor) {
-			maxlen = this.Cursor;
-		}
-		
-		int i;
+        if(maxlen > this.Cursor) {
+            maxlen = this.Cursor;
+        }
 
-		for(i = 0; i < maxlen; i++) {
-			output[i] = g_Buffer[this][i];
-		}
-		
-		return i;
+        int i;
+
+        for(i = 0; i < maxlen; i++) {
+            output[i] = g_Buffer[this][i];
+        }
+
+        return i;
 	}
 
     int Append(ByteBuffer buffer) {
-		int length = buffer.iCursor;
-		char[] dumped = new char[length];
+        int length = buffer.iCursor;
+        char[] dumped = new char[length];
 
-		buffer.Dump(dumped, length);
-		
-		for(int i = 0; i < length; i++) {
-			this.WriteByte(dumped[i]);
-		}
-		
-		return length;
+        buffer.Dump(dumped, length);
+
+        for(int i = 0; i < length; i++) {
+            this.WriteByte(dumped[i]);
+        }
+
+        return length;
 	}
 
     ByteBuffer Extract(int length) {
-		ByteBuffer output;
+        ByteBuffer output;
 
         output.eEndian = this.eEndian;
-		
-		for(int i = 0; i < length; i++) {
-			output.WriteByte(this.ReadByte());
-		}
-		
-		output.iCursor = 0;
 
-		return output;
+        for(int i = 0; i < length; i++) {
+            output.WriteByte(this.ReadByte());
+        }
+
+        output.iCursor = 0;
+
+        return output;
 	}
 
     void Reset() {
