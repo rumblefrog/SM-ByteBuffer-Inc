@@ -5,10 +5,6 @@
 
 #define BYTEBUFFER_VERSION 3
 
-#if !defined MAX_BUFFERS
- #define MAX_BUFFERS 32
-#endif
-
 #if !defined MAX_BUFFER_LENGTH
  #define MAX_BUFFER_LENGTH 1024
 #endif
