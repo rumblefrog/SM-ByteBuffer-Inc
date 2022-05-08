@@ -207,7 +207,7 @@ methodmap ByteBuffer {
 	}
 }
 
-ByteBuffer CreateByteBuffer(bool littleEndian = true, const char data[] = "", int dataSize = 0) {
+ByteBuffer CreateByteBuffer(bool littleEndian = true, const char[] data = "", int dataSize = 0) {
 	int id = -1;
 	for(int i = 0; i < MAX_BUFFERS; i++) {
 		if(!g_InUse[i]) {
